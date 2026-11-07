@@ -1,1 +1,348 @@
-<h1>학생 02의 웹앱 (준비 중)</h1>
+<!doctype html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>나를 소개합니다</title>
+
+  <style>
+
+    :root {
+
+      --bg: #f4f7ff;
+
+      --card: #ffffff;
+
+      --text: #1f2440;
+
+      --muted: #5b6285;
+
+      --accent: #4f6bff;
+
+      --fun: #ffb020;
+
+      --hard: #ff5c7a;
+
+      --hobby: #22b07d;
+
+      --dream: #9b5cff;
+
+    }
+
+    @media (prefers-color-scheme: dark) {
+
+      :root {
+
+        --bg: #12152a;
+
+        --card: #1d2140;
+
+        --text: #eef0ff;
+
+        --muted: #a9aed0;
+
+        --accent: #8fa0ff;
+
+      }
+
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+
+      margin: 0;
+
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      line-height: 1.6;
+
+    }
+
+    main { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+
+    header { text-align: center; margin-bottom: 28px; }
+
+    .avatar { font-size: 64px; line-height: 1; }
+
+    h1 { margin: 12px 0 4px; font-size: 2rem; }
+
+    .sub { color: var(--muted); margin: 0; }
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      gap: 16px;
+
+    }
+
+    .card {
+
+      background: var(--card);
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      box-shadow: 0 4px 18px rgba(0, 0, 0, .06);
+
+      border-top: 6px solid var(--c);
+
+    }
+
+    .card h2 { margin: 0 0 10px; font-size: 1.1rem; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag {
+
+      background: color-mix(in srgb, var(--c) 15%, transparent);
+
+      color: var(--text);
+
+      padding: 4px 12px;
+
+      border-radius: 999px;
+
+      font-weight: 600;
+
+    }
+
+    .card p { margin: 10px 0 0; color: var(--muted); font-size: .95rem; }
+
+    .quiz { margin-top: 28px; text-align: center; }
+
+    .quiz h2 { margin: 0 0 6px; }
+
+    .problem { font-size: 2rem; font-weight: 700; margin: 12px 0; }
+
+    .quiz input {
+
+      font-size: 1.2rem; width: 120px; padding: 8px 10px; text-align: center;
+
+      border-radius: 10px; border: 2px solid var(--muted);
+
+      background: var(--bg); color: var(--text);
+
+    }
+
+    button {
+
+      font-size: 1rem; font-weight: 700; padding: 10px 18px; margin: 6px;
+
+      border: 0; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer;
+
+    }
+
+    button:hover { filter: brightness(1.1); }
+
+    .result { min-height: 1.6em; font-weight: 700; margin-top: 8px; }
+
+    .score { color: var(--muted); }
+
+    .week {
+
+      display: inline-block; margin-top: 16px; padding: 12px 20px; border-radius: 12px;
+
+      background: var(--accent); color: #fff; font-weight: 700; text-decoration: none;
+
+    }
+
+    .week:hover { filter: brightness(1.1); }
+
+    footer { text-align: center; margin-top: 32px; }
+
+    footer a { color: var(--accent); font-weight: 600; }
+
+  </style>
+
+</head>
+
+<body>
+
+  <main>
+
+    <header>
+
+      <div class="avatar">🧑 🎓</div>
+
+      <h1>나를 소개합니다!</h1>
+
+      <p class="sub">6학년 · 미래의 수학자 🧮</p>
+
+      <a class="week" href="https://kals-g6.github.io/week1/s02/">📘 Week 1 · Section 2 바로 가기 →</a>
+
+    </header>
+
+
+
+    <section class="grid">
+
+      <div class="card" style="--c: var(--fun)">
+
+        <h2>😄 재미있는 과목</h2>
+
+        <div class="tags"><span class="tag">🤖 AI</span><span class="tag">🏃 체육</span></div>
+
+        <p>머리 쓰는 것도, 몸 쓰는 것도 좋아해요!</p>
+
+      </div>
+
+      <div class="card" style="--c: var(--hard)">
+
+        <h2>😓 어려운 과목</h2>
+
+        <div class="tags"><span class="tag">🌏 사회</span></div>
+
+        <p>외울 게 많지만 조금씩 도전 중!</p>
+
+      </div>
+
+      <div class="card" style="--c: var(--hobby)">
+
+        <h2>🎮 취미</h2>
+
+        <div class="tags"><span class="tag">🎮 게임</span><span class="tag">📚 책</span></div>
+
+        <p>언젠가 직접 게임을 만들어 보고 싶어요.</p>
+
+      </div>
+
+      <div class="card" style="--c: var(--dream)">
+
+        <h2>🌟 꿈</h2>
+
+        <div class="tags"><span class="tag">🧮 수학자</span></div>
+
+        <p>AI도 수학으로 만들어진대요!</p>
+
+      </div>
+
+    </section>
+
+
+
+    <section class="card quiz" style="--c: var(--accent)">
+
+      <h2>🧠 미래 수학자 도전!</h2>
+
+      <p class="sub">문제를 풀고 점수를 모아 보세요.</p>
+
+      <div class="problem" id="problem">?</div>
+
+      <input id="answer" type="number" inputmode="numeric" aria-label="정답">
+
+      <div>
+
+        <button id="check">정답 확인</button>
+
+        <button id="next">다음 문제</button>
+
+      </div>
+
+      <div class="result" id="result"></div>
+
+      <div class="score">점수: <span id="score">0</span></div>
+
+    </section>
+
+
+
+    <footer>
+
+      <a href="https://kals-g6.github.io/week1/s02/">📘 Week 1 · Section 2 보러 가기</a>
+
+    </footer>
+
+  </main>
+
+
+
+  <script>
+
+    let a, b, op, answer, score = 0, solved = false;
+
+    const $ = (id) => document.getElementById(id);
+
+    const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+
+    function newProblem() {
+
+      op = ["+", "−", "×"][rand(0, 2)];
+
+      if (op === "+") { a = rand(10, 99); b = rand(10, 99); answer = a + b; }
+
+      if (op === "−") { a = rand(20, 99); b = rand(1, a); answer = a - b; }
+
+      if (op === "×") { a = rand(2, 12); b = rand(2, 12); answer = a * b; }
+
+      $("problem").textContent = `${a} ${op} ${b} = ?`;
+
+      $("answer").value = "";
+
+      $("result").textContent = "";
+
+      solved = false;
+
+      $("answer").focus();
+
+    }
+
+
+
+    function check() {
+
+      const v = $("answer").value.trim();
+
+      if (v === "") { $("result").textContent = "답을 입력해 주세요!"; return; }
+
+      if (Number(v) === answer) {
+
+        if (!solved) { score++; $("score").textContent = score; }
+
+        solved = true;
+
+        $("result").textContent = "🎉 정답! 다음 문제에 도전해 보세요.";
+
+      } else {
+
+        $("result").textContent = "🤔 아쉬워요, 다시 생각해 볼까요?";
+
+      }
+
+    }
+
+
+
+    $("check").addEventListener("click", check);
+
+    $("next").addEventListener("click", newProblem);
+
+    $("answer").addEventListener("keydown", (e) => {
+
+      if (e.key === "Enter") solved ? newProblem() : check();
+
+    });
+
+    newProblem();
+
+  </script>
+
+</body>
+
+</html>
+
