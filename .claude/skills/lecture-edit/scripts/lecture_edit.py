@@ -26,12 +26,37 @@ EXPORT_EXT = {"premiere": ".xml", "resolve": ".fcpxml", "final-cut-pro": ".fcpxm
 
 
 # ---------------------------------------------------------------- auto-editor
-def find_ae(explicit: str | None) -> str:
-    cand = explicit or os.environ.get("AUTO_EDITOR") or shutil.which("auto-editor")
-    if not cand or not (Path(cand).exists() or shutil.which(cand)):
-        sys.exit("auto-editor not found. Set --ae PATH or AUTO_EDITOR env "
-                 "(binary: github.com/WyattBlue/auto-editor/releases).")
-    return cand
+RELEASE = "https://github.com/WyattBlue/auto-editor/releases/latest/download/"
+ASSETS = {"linux": "auto-editor-linux-x86_64", "win32": "auto-editor-windows-x86_64.exe",
+          "darwin": "auto-editor-macos-arm64"}
+CACHE = Path.home() / ".cache" / "lecture-edit"
+
+
+def install_ae() -> str:
+    import platform
+    import urllib.request
+    asset = ASSETS.get(sys.platform)
+    if sys.platform == "darwin" and platform.machine() != "arm64":
+        sys.exit("no prebuilt binary for Intel macOS: use `brew install auto-editor`")
+    if not asset:
+        sys.exit(f"no prebuilt auto-editor for {sys.platform}")
+    CACHE.mkdir(parents=True, exist_ok=True)
+    dst = CACHE / ("auto-editor.exe" if sys.platform == "win32" else "auto-editor")
+    print(f"downloading {asset} -> {dst}", file=sys.stderr)
+    urllib.request.urlretrieve(RELEASE + asset, dst)
+    dst.chmod(0o755)
+    return str(dst)
+
+
+def find_ae(explicit: str | None, install: bool = False) -> str:
+    cached = CACHE / ("auto-editor.exe" if sys.platform == "win32" else "auto-editor")
+    for cand in (explicit, os.environ.get("AUTO_EDITOR"), shutil.which("auto-editor"),
+                 str(cached) if cached.exists() else None):
+        if cand and (Path(cand).exists() or shutil.which(cand)):
+            return cand
+    if install:
+        return install_ae()
+    sys.exit("auto-editor not found. Rerun with --install, or set --ae PATH / AUTO_EDITOR env.")
 
 
 def run(cmd: list[str], capture: bool = True) -> str:
@@ -182,9 +207,11 @@ def main() -> None:
     p.add_argument("--srt", type=Path, help="existing SRT on the ORIGINAL timeline to remap (skips whisper)")
     p.add_argument("--outdir", type=Path)
     p.add_argument("--ae", help="path to auto-editor binary")
+    p.add_argument("--install", action="store_true",
+                   help="download the auto-editor release binary to ~/.cache/lecture-edit if missing")
     a = p.parse_args()
 
-    ae = find_ae(a.ae)
+    ae = find_ae(a.ae, a.install)
     src = a.input.resolve()
     if not src.exists():
         sys.exit(f"input not found: {src}")

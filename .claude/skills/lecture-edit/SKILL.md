@@ -14,8 +14,9 @@ The default (`--board high`) is `(or audio motion)`: keep a section if there is 
 Use `--board low` (audio only) only for talking-head or slide-only recordings.
 
 ## Prerequisites
-1. auto-editor binary: download `auto-editor-linux-x86_64` / macOS / Windows from GitHub Releases, or `brew install auto-editor`.
-   Point to it with `--ae PATH` or the `AUTO_EDITOR` env var (otherwise it is looked up on PATH).
+1. auto-editor binary. Lookup order: `--ae PATH` → `AUTO_EDITOR` env → PATH → `~/.cache/lecture-edit/`.
+   If none is found, add `--install` to download the release binary for the current OS (Linux/Windows/macOS) into the cache. Always try this first when running inside a sandbox.
+   Script location: run `python3 <this skill folder>/scripts/lecture_edit.py`, using the absolute path to the skill folder (not relative to the current directory).
 2. (For subtitles) a whisper.cpp ggml model file, e.g. `ggml-medium.bin` or `ggml-large-v3-turbo.bin` (from huggingface `ggerganov/whisper.cpp`).
    For Korean, `tiny`/`base` quality is too low, so use medium or larger.
 
